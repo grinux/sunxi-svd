@@ -167,7 +167,7 @@
                 </enumeratedValues>
               </field>
               <field>
-                <name>ADAP_LCHAN_GAIN</name>
+                <name>ADAP_RCHAN_GAIN</name>
                 <description>Right Channel Gain applied by AGC (7.1format 2s component)(0.5dB step   0x50 : 40dB 0x4F : 39.5dB --------------- 0x00 : 00dB 0xFF : -0.5dB </description>
                 <bitRange>[7:0]</bitRange>
                 <access>read-only</access>
@@ -14015,26 +14015,26 @@
           <resetMask>0x130F03</resetMask>
           <fields>
             <field>
-              <name>EHCI</name>
-              <description>HS force Set 1 to this field force the ehci enter the high speed mode during bus reset. This field only valid when the bit 1 is set. </description>
+              <name>EHCI_HS_FORCE_SET</name>
+              <description>EHCI HS force Set 1 to this field force the ehci enter the high speed mode during bus reset. This field only valid when the bit 1 is set. </description>
               <bitRange>[20:20]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>HSIC</name>
-              <description>Connect detect 1 in this field enable the hsic phy to detect device connect pulse on the bus. This field only valid when the bit 1 is set. </description>
+              <name>HSIC_CONNECT_DETECT_IN</name>
+              <description>HSIC Connect detect 1 in this field enable the hsic phy to detect device connect pulse on the bus. This field only valid when the bit 1 is set. </description>
               <bitRange>[17:17]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>HSIC</name>
-              <description>Connect Interrupt Enable Enable the HSIC connect interrupt. This field only valid when the bit 1 is set. </description>
+              <name>HSIC_CONNECT_INTERRUPT_ENABLE_ENABLE</name>
+              <description>HSIC Connect Interrupt Enable Enable the HSIC connect interrupt. This field only valid when the bit 1 is set. </description>
               <bitRange>[16:16]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>AHB</name>
-              <description>Master interface INCR16 enable 
+              <name>AHB_MASTER_INTERFACE_INCR16_ENABLE</name>
+              <description>AHB Master interface INCR16 enable 
 1: Use INCR16 when appropriate 
 0: do not use INCR16,use other enabled INCRX or unspecified length burst INCR </description>
               <bitRange>[11:11]</bitRange>
@@ -14053,8 +14053,8 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>AHB</name>
-              <description>Master interface INCR8 enable 
+              <name>AHB_MASTER_INTERFACE_INCR8_ENABLE</name>
+              <description>AHB Master interface INCR8 enable 
 1: Use INCR8 when appropriate 
 0: do not use INCR8,use other enabled INCRX or unspecified length burst INCR </description>
               <bitRange>[10:10]</bitRange>
@@ -14073,8 +14073,8 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>AHB</name>
-              <description>Master interface burst type INCR4 enable 
+              <name>AHB_MASTER_INTERFACE_BURST_TYPE</name>
+              <description>AHB Master interface burst type INCR4 enable 
 1: Use INCR4 when appropriate 
 0: do not use INCR4,use other enabled INCRX or unspecified length burst INCR </description>
               <bitRange>[9:9]</bitRange>
@@ -14093,8 +14093,8 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>AHB</name>
-              <description>Master interface INCRX align enable 
+              <name>AHB_MASTER_INTERFACE_INCRX_ALIGN</name>
+              <description>AHB Master interface INCRX align enable 
 1: start INCRx burst only on burst x-align address 
 0: Start burst on any double word boundary Note: This bit must enable if any bit of 11:9 is enabled </description>
               <bitRange>[8:8]</bitRange>
@@ -14114,13 +14114,13 @@
             </field>
             <field>
               <name>HSIC</name>
-              <description>0:/ 1:HSIC This meaning is only valid when the controller is HCI1. </description>
+              <description>HSIC  0:/ 1:HSIC This meaning is only valid when the controller is HCI1. </description>
               <bitRange>[1:1]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>ULPI</name>
-              <description>bypass enable 
+              <name>ULPI_BYPASS_ENABLE</name>
+              <description>ULPI bypass enable 
 1: Enable UTMI interface, disable ULPI interface(SP used utmi    interface) 
 0: Enable ULPI interface, disable UTMI interface </description>
               <bitRange>[0:0]</bitRange>
@@ -17335,7 +17335,7 @@ x1: VU </description>
           <resetMask>0x3F0F1F</resetMask>
           <fields>
             <field>
-              <name>SRC_TYPE_SOURCE_TYPE</name>
+              <name>SRC_TYPE_SOURCE</name>
               <description>SRC_TYPE Source type 
 0: Progressed 
 1: Interlaced </description>
@@ -17355,7 +17355,7 @@ x1: VU </description>
               </enumeratedValues>
             </field>
             <field>
-              <name>FPS_DS_FPS_DOWN</name>
+              <name>FPS_DS_FPS</name>
               <description>FPS_DS Fps down sample 
 0: no down sample 
 1: 1/2 fps, only receives the first frame every 2 frames </description>
@@ -17375,7 +17375,7 @@ x1: VU </description>
               </enumeratedValues>
             </field>
             <field>
-              <name>FIELD_FOR_YUV</name>
+              <name>FIELD</name>
               <description>FIELD For YUV HV timing, Field polarity 
 0: negative(field=0 indicate odd, field=1 indicate even ) 
 1: positive(field=1 indicate odd, field=0 indicate even ) For BT656 timing, Field sequence 
@@ -17407,7 +17407,7 @@ x1: VU </description>
               </enumeratedValues>
             </field>
             <field>
-              <name>VREF_POL_VREF_POLARITY</name>
+              <name>VREF_POL_VREF</name>
               <description>VREF_POL Vref polarity 
 0: negative 
 1: positive This register is not apply to CCIR656 interface. </description>
@@ -17427,7 +17427,7 @@ x1: VU </description>
               </enumeratedValues>
             </field>
             <field>
-              <name>HERF_POL_HREF_POLARITY</name>
+              <name>HERF_POL_HREF</name>
               <description>HERF_POL Href polarity 
 0: negative 
 1: positive This register is not apply to CCIR656 interface. </description>
@@ -17447,7 +17447,7 @@ x1: VU </description>
               </enumeratedValues>
             </field>
             <field>
-              <name>CLK_POL_DATA_CLOCK</name>
+              <name>CLK_POL_DATA</name>
               <description>CLK_POL Data clock type 
 0: active in rising edge 
 1: active in falling edge </description>
@@ -17467,7 +17467,7 @@ x1: VU </description>
               </enumeratedValues>
             </field>
             <field>
-              <name>SEQ_8PLUS2_WHEN_SELECT</name>
+              <name>SEQ_8PLUS2</name>
               <description>SEQ_8PLUS2 When select IF_DATA_WIDTH to be 8+2bit, odd/even pixel byte at  CSI-D[11:4] will be rearranged to D[11:2]+2`b0 at the actual csi data bus according to these sequences: 
 00: 6`bx+D[9:8], D[7:0] 
 01: D[9:2], 6`bx+D[1:0] 
@@ -32768,14 +32768,6 @@ x1: VU </description>
           <name>PG_EINT_CFG2_REG</name>
           <description>PG_EINT_CFG2_REG</description>
           <addressOffset>0x228</addressOffset>
-          <resetValue>0x0</resetValue>
-          <resetMask>0x0</resetMask>
-          <fields/>
-        </register>
-        <register>
-          <name>PG_EINT_CFG3_REG</name>
-          <description>PG_EINT_CFG3_REG</description>
-          <addressOffset>0x22C</addressOffset>
           <resetValue>0x0</resetValue>
           <resetMask>0x0</resetMask>
           <fields/>
