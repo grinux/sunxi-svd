@@ -1588,13 +1588,13 @@
             <name>AC_DAC_DRC_RRMSLAT</name>
             <description>DAC DRC Right RMS Filter Low Coef Register</description>
             <addressOffset>0x138</addressOffset>
-            <resetValue>0x0</resetValue>
-            <resetMask>0x0</resetMask>
+            <resetValue>0x2BAF</resetValue>
+            <resetMask>0xFFFF</resetMask>
             <fields>
               <field>
                 <name>RIGHT_RMS_FILTER_AVERAGE_TIME</name>
                 <description>The right RMS filter average time parameter setting, which determine by the equation that AT = 1-exp(-2.2Ts/tav). The format is 3.24.(10ms) </description>
-                <bitRange>[10:0]</bitRange>
+                <bitRange>[15:0]</bitRange>
                 <access>read-write</access>
               </field>
             </fields>
@@ -18757,44 +18757,44 @@
               <access>read-write</access>
             </field>
             <field>
-              <name>R__W_</name>
-              <description>(read) LowSpeedDeviceAttached  This bit indicates the speed of the device attached to this port. When set, a Low Speed device is attached to this port. When clear, a Full Speed device is attached to this port. This field is valid only when the CurrentConnectStatus is set. 0 full speed device attached 1 low speed device attached  (write) ClearPortPower The HCD clears the PortPowerStatus bit by writing a `1` to this bit. Writing a `0` has no effect. </description>
+              <name>R_LOW_SPEED_DEVICE_ATTACHED_W_CLEAR_PORT_POWER</name>
+              <description>(read)LowSpeedDeviceAttached  This bit indicates the speed of the device attached to this port. When set, a Low Speed device is attached to this port. When clear, a Full Speed device is attached to this port. This field is valid only when the CurrentConnectStatus is set. 0 full speed device attached 1 low speed device attached  (write)ClearPortPower The HCD clears the PortPowerStatus bit by writing a `1` to this bit. Writing a `0` has no effect. </description>
               <bitRange>[9:9]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>R__W_</name>
-              <description>(read) PortPowerStatus This bit reflects the port`s power status, regardless of the type of power switching implemented. This bit is cleared if an overcurrent condition is detected. HCD sets this bit by writing SetPortPower  or SetGlobalPower . HCD clears this bit by writing ClearPortPower or ClearGlobalPower . Which power control switches are enabled is determined by PowerSwitchingMode  and PortPortControlMask[ NumberDownstreamPort ] . In global switching mode( PowerSwitchingMode =0), only Set/ClearGlobalPower controls this bit. In per-port power switching ( PowerSwitchingMode =1), if the PortPowerControlMask[NDP] bit for the port is set, only Set/ClearPortPower commands are enabled. If the mask is not set, only Set/ClearGlobalPower commands are enabled. When port power is disabled, CurrentConnectStatus , PortEnableStatus , PortSuspendStatus , and PortResetStatus should be reset. 0 port power is off 1 port power is on  (write) SetPortPower  The HCD writes a `1` to set the PortPowerStatus bit. Writing a `0` has no effect.  Note: This bit is always reads `1b` if power switching is not supported. </description>
+              <name>R_PORT_POWER_STATUS_W_SET_PORT_POWER</name>
+              <description>(read)PortPowerStatus This bit reflects the port`s power status, regardless of the type of power switching implemented. This bit is cleared if an overcurrent condition is detected. HCD sets this bit by writing SetPortPower  or SetGlobalPower . HCD clears this bit by writing ClearPortPower or ClearGlobalPower . Which power control switches are enabled is determined by PowerSwitchingMode  and PortPortControlMask[ NumberDownstreamPort ] . In global switching mode( PowerSwitchingMode =0), only Set/ClearGlobalPower controls this bit. In per-port power switching ( PowerSwitchingMode =1), if the PortPowerControlMask[NDP] bit for the port is set, only Set/ClearPortPower commands are enabled. If the mask is not set, only Set/ClearGlobalPower commands are enabled. When port power is disabled, CurrentConnectStatus , PortEnableStatus , PortSuspendStatus , and PortResetStatus should be reset. 0 port power is off 1 port power is on  (write)SetPortPower  The HCD writes a `1` to set the PortPowerStatus bit. Writing a `0` has no effect.  Note: This bit is always reads `1b` if power switching is not supported. </description>
               <bitRange>[8:8]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>R__W_</name>
-              <description>(read) PortResetStatus  When this bit is set by a write to SetPortReset , port reset signaling is asserted. When reset is completed, this bit is cleared when PortResetStatusChange is set. This bit cannot be set if CurrentConnectStatus is cleared. 0 port reset signal is not active 1 port reset signal is active  (write) SetPortReset  The HCD sets the port reset signaling by writing a `1` to this bit. Writing a `0` has no effect. If CurrentConnectStatus is cleared, this write does not set PortResetStatus , but instead sets ConnectStatusChange . This informs the driver that it attempted to reset a disconnected port. </description>
+              <name>R_PORT_RESET_STATUS_W_SET_PORT_RESET</name>
+              <description>(read)PortResetStatus  When this bit is set by a write to SetPortReset , port reset signaling is asserted. When reset is completed, this bit is cleared when PortResetStatusChange is set. This bit cannot be set if CurrentConnectStatus is cleared. 0 port reset signal is not active 1 port reset signal is active  (write)SetPortReset  The HCD sets the port reset signaling by writing a `1` to this bit. Writing a `0` has no effect. If CurrentConnectStatus is cleared, this write does not set PortResetStatus , but instead sets ConnectStatusChange . This informs the driver that it attempted to reset a disconnected port. </description>
               <bitRange>[4:4]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>R__W_</name>
-              <description>(read) PortOverCurrentIndicator  This bit is only valid when the Root Hub is configured in such a way that overcurrent conditions are reported on a per-port basis. If per-port overcurrent reporting is not supported, this bit is set to 0. If cleared, all power operations are normal for this port. If set, an overcurrent condition exists on this port. This bit always reflects the overcurrent input signal. 0 no overcurrent condition. 1 overcurrent condition detected.  (write) ClearSuspendStatus The HCD writes a `1` to initiate a resume. Writing a `0` has no effect. A resume is initiated only if PortSuspendStatus is set. </description>
+              <name>R_PORT_OVER_CURRENT_INDICATOR_W_CLEAR_SUSPEND_STATUS</name>
+              <description>(read)PortOverCurrentIndicator  This bit is only valid when the Root Hub is configured in such a way that overcurrent conditions are reported on a per-port basis. If per-port overcurrent reporting is not supported, this bit is set to 0. If cleared, all power operations are normal for this port. If set, an overcurrent condition exists on this port. This bit always reflects the overcurrent input signal. 0 no overcurrent condition. 1 overcurrent condition detected.  (write)ClearSuspendStatus The HCD writes a `1` to initiate a resume. Writing a `0` has no effect. A resume is initiated only if PortSuspendStatus is set. </description>
               <bitRange>[3:3]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>R__W_</name>
-              <description>(read) PortSuspendStatus  This bit indicates the port is suspended or in the resume sequence. It is set by a SetSuspendState write and cleared when PortSuspendStatusChange is set at the end of the resume interval. This bit cannot be set if CurrentConnectStatus is cleared. This bit is also cleared when PortResetStatusChange is set at the end of the port reset or when the HC is placed in the USBRESUME state. If an upstream resume is in progress, it should propagate to the HC. 0 port is not suspended 1 port is suspended  (write) SetPortSuspend The HCD sets the PortSuspendStatus bit by writing a `1` to this bit. Writing a `0` has no effect. If CurrentConnectStatus is cleared, this write does not set PortSuspendStatus ; instead it sets ConnectStatusChange . This informs the driver that it attempted to suspend a disconnected port. </description>
+              <name>R_PORT_SUSPEND_STATUS_W_SET_PORT_SUSPEND</name>
+              <description>(read)PortSuspendStatus  This bit indicates the port is suspended or in the resume sequence. It is set by a SetSuspendState write and cleared when PortSuspendStatusChange is set at the end of the resume interval. This bit cannot be set if CurrentConnectStatus is cleared. This bit is also cleared when PortResetStatusChange is set at the end of the port reset or when the HC is placed in the USBRESUME state. If an upstream resume is in progress, it should propagate to the HC. 0 port is not suspended 1 port is suspended  (write)SetPortSuspend The HCD sets the PortSuspendStatus bit by writing a `1` to this bit. Writing a `0` has no effect. If CurrentConnectStatus is cleared, this write does not set PortSuspendStatus ; instead it sets ConnectStatusChange . This informs the driver that it attempted to suspend a disconnected port. </description>
               <bitRange>[2:2]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>R__W_</name>
-              <description>(read) PortEnableStatus This bit indicates whether the port is enabled or disabled. The Root Hub may clear this bit when an overcurrent condition, disconnect event, switched-off power, or operational bus error such as babble is detected. This change also causes PortEnabledStatusChange to be set. HCD sets this bit by writing SetPortEnable and clears it by writing ClearPortEnable . This bit cannot be set when CurrentConnectStatus is cleared. This bit is also set, if not already, at the completion of a port reset when ResetStatusChange is set or port suspend when SuspendStatusChange is set. 0 port is disabled 1 port is enabled  (write) SetPortEnable The HCD sets PortEnableStatus by writing a `1`. Writing a `0` has no effect. If CurrentConnectStatus is cleared, this write does not set PortEnableStatus , but instead sets ConnectStatusChange . This informs the driver that it attempted to enable a disconnected Port. </description>
+              <name>R_PORT_ENABLE_STATUS_W_SET_PORT_ENABLE</name>
+              <description>(read)PortEnableStatus This bit indicates whether the port is enabled or disabled. The Root Hub may clear this bit when an overcurrent condition, disconnect event, switched-off power, or operational bus error such as babble is detected. This change also causes PortEnabledStatusChange to be set. HCD sets this bit by writing SetPortEnable and clears it by writing ClearPortEnable . This bit cannot be set when CurrentConnectStatus is cleared. This bit is also set, if not already, at the completion of a port reset when ResetStatusChange is set or port suspend when SuspendStatusChange is set. 0 port is disabled 1 port is enabled  (write)SetPortEnable The HCD sets PortEnableStatus by writing a `1`. Writing a `0` has no effect. If CurrentConnectStatus is cleared, this write does not set PortEnableStatus , but instead sets ConnectStatusChange . This informs the driver that it attempted to enable a disconnected Port. </description>
               <bitRange>[1:1]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>R__W_</name>
-              <description>(read) CurrentConnectStatus This bit reflects the current state of the downstream port. 0 No device connected 1 Device connected (write) ClearPortEnable The HCD writes a `1` to clear the PortEnableStatus bit. Writing `0` has no effect. The CurrentConnectStatus is not affected by any write. Note: This bit is always read `1` when the attached device is nonremovalble(DviceRemoveable[NumberDownstreamPort]). </description>
+              <name>R_CURRENT_CONNECT_STATUS_W_CLEAR_PORT_ENABLE</name>
+              <description>(read)CurrentConnectStatus This bit reflects the current state of the downstream port. 0 No device connected 1 Device connected (write)ClearPortEnable The HCD writes a `1` to clear the PortEnableStatus bit. Writing `0` has no effect. The CurrentConnectStatus is not affected by any write. Note: This bit is always read `1` when the attached device is nonremovalble(DviceRemoveable[NumberDownstreamPort]). </description>
               <bitRange>[0:0]</bitRange>
               <access>read-write</access>
             </field>
@@ -19278,7 +19278,7 @@
           <resetMask>0x13141F05</resetMask>
           <fields>
             <field>
-              <name>DMA</name>
+              <name>DMA_TRANSFER_STATUS_EN</name>
               <description>Transfer Status Enable 
 0: Disable 
 1: Enable </description>
@@ -19298,7 +19298,7 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>OHCI</name>
+              <name>OHCI_COUNT_SEL</name>
               <description>count select 
 1: Simulation mode, the counters will be much shorter then real time 
 0: Normal mode, the counters will count full time </description>
@@ -19318,7 +19318,7 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>SIMULATION</name>
+              <name>SIMULATION_MODE</name>
               <description>Simulation mode 
 1: Set PHY in a non-driving mode so the EHCI can detect device connection, this is used only for simulation 
 0: No effect </description>
@@ -19338,10 +19338,29 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>EHCI</name>
+              <name>EHCI_HS_FORCE</name>
               <description>HS force Set 1 to this field force the ehci enter the high speed mode during bus reset. This field only valid when the bit 1 is set. </description>
               <bitRange>[20:20]</bitRange>
               <access>read-write</access>
+            </field>
+            <field>
+              <name>RESUME_K_STRATEGY</name>
+              <description>1: within 2us of the resume-K to SE0 transition 
+0: random time value of the resume-K to SE0 transition </description>
+              <bitRange>[18:18]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>within</name>
+                  <description>within 2us of the resume-K to SE0 transition</description>
+                  <value>0b1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>random</name>
+                  <description>random time value of the resume-K to SE0 transition</description>
+                  <value>0b0</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
               <name>PP2VBUS</name>
@@ -19363,7 +19382,7 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>AHB</name>
+              <name>AHB_INCR16_EN</name>
               <description>Master interface INCR16 enable 
 1: Use INCR16 when appropriate 
 0: do not use INCR16,use other enabled INCRX or unspecified length burst INCR </description>
@@ -19383,7 +19402,7 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>AHB</name>
+              <name>AHB_INCR8_EN</name>
               <description>Master interface INCR8 enable 
 1: Use INCR8 when appropriate 
 0: do not use INCR8,use other enabled INCRX or unspecified length burst INCR </description>
@@ -19403,7 +19422,7 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>AHB</name>
+              <name>AHB_INCR4_EN</name>
               <description>Master interface burst type INCR4 enable 
 1: Use INCR4 when appropriate 
 0: do not use INCR4,use other enabled INCRX or unspecified length burst INCR </description>
@@ -19423,7 +19442,7 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>AHB</name>
+              <name>AHB_INCRX_ALIGN_EN</name>
               <description>Master interface INCRX align enable 
 1: start INCRx burst only on burst x-align address 
 0: Start burst on any double word boundary Note: This bit must enable if any bit of 11:9 is enabled </description>
@@ -19443,7 +19462,7 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>RC16M</name>
+              <name>RC16M_CLK_EN</name>
               <description>CLK enable 
 0: disable 1:enable </description>
               <bitRange>[2:2]</bitRange>
@@ -19457,7 +19476,7 @@
               </enumeratedValues>
             </field>
             <field>
-              <name>ULPI</name>
+              <name>ULPI_BYPASS_EN</name>
               <description>bypass enable 
 1: Enable UTMI interface, disable ULPI interface 
 0: Enable ULPI interface, disable UTMI interface </description>
@@ -28998,13 +29017,13 @@
           <resetMask>0xC0</resetMask>
           <fields>
             <field>
-              <name>AXI</name>
+              <name>AXI_TO_MBUS_CLOCK_GATING_DIS</name>
               <description>to MBUS Clock Gating disable, the priority of this bit is higher than bit[6] </description>
               <bitRange>[7:7]</bitRange>
               <access>read-write</access>
             </field>
             <field>
-              <name>AXI</name>
+              <name>AXI_TO_MBUS_CLOCK_GATING_EN</name>
               <description>to MBUS Clock Gating enable </description>
               <bitRange>[6:6]</bitRange>
               <access>read-write</access>
@@ -30516,28 +30535,28 @@
           <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
-              <name>TASK_CHANNEL_ERROR_TYPE</name>
+              <name>TASK_CHANNEL_3</name>
               <description>Task channel 3 error type. (the same for other channels) Bit 24: algorithm not support Bit 25: data length error Bit 26: keysram access error. Write `1` to clear. Bit 29: address invalid other: reserved </description>
               <bitRange>[31:24]</bitRange>
               <access>read-write</access>
               <modifiedWriteValues>oneToClear</modifiedWriteValues>
             </field>
             <field>
-              <name>TASK_CHANNEL_ERROR_TYPE</name>
+              <name>TASK_CHANNEL_2</name>
               <description>Task channel 2 error type. Bit 16: algorithm not support Bit 17: data length error Bit 18: keysram access error. Write `1` to clear. Bit 21: address invalid other: reserved </description>
               <bitRange>[23:16]</bitRange>
               <access>read-write</access>
               <modifiedWriteValues>oneToClear</modifiedWriteValues>
             </field>
             <field>
-              <name>TASK_CHANNEL_ERROR_TYPE</name>
+              <name>TASK_CHANNEL_1</name>
               <description>Task channel 1 error type. Bit 8: algorithm not support Bit 9: data length error Bit 10: keysram access error. Write `1` to clear. Bit 13: address invalid other: reserved </description>
               <bitRange>[15:8]</bitRange>
               <access>read-write</access>
               <modifiedWriteValues>oneToClear</modifiedWriteValues>
             </field>
             <field>
-              <name>TASK_CHANNEL_ERROR_TYPE</name>
+              <name>TASK_CHANNEL_0</name>
               <description>Task channel 0 error type. Bit 0: algorithm not support Bit 1: data length error Bit 2: keysram access error. Write `1` to clear. Bit 5: address invalid other: reserved </description>
               <bitRange>[7:0]</bitRange>
               <access>read-write</access>
@@ -50757,7 +50776,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_31</name>
               <description>It is used to indicate the data block 31 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50777,7 +50796,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_30</name>
               <description>It is used to indicate the data block 30 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50797,7 +50816,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_29</name>
               <description>It is used to indicate the data block 29 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50817,7 +50836,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_28</name>
               <description>It is used to indicate the data block 28 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50837,7 +50856,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_27</name>
               <description>It is used to indicate the data block 27 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50857,7 +50876,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_26</name>
               <description>It is used to indicate the data block 26 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50877,7 +50896,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_25</name>
               <description>It is used to indicate the data block 25 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50897,7 +50916,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_24</name>
               <description>It is used to indicate the data block 24 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50917,7 +50936,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_23</name>
               <description>It is used to indicate the data block 23 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50937,7 +50956,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_22</name>
               <description>It is used to indicate the data block 22 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50957,7 +50976,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_21</name>
               <description>It is used to indicate the data block 21 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50977,7 +50996,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_20</name>
               <description>It is used to indicate the data block 20 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -50997,7 +51016,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_19</name>
               <description>It is used to indicate the data block 19 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51017,7 +51036,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_18</name>
               <description>It is used to indicate the data block 18 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51037,7 +51056,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_17</name>
               <description>It is used to indicate the data block 17 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51057,7 +51076,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_16</name>
               <description>It is used to indicate the data block 16 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51077,7 +51096,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_15</name>
               <description>It is used to indicate the data block 15 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51097,7 +51116,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_14</name>
               <description>It is used to indicate the data block 14 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51117,7 +51136,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_13</name>
               <description>It is used to indicate the data block 13 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51137,7 +51156,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_12</name>
               <description>It is used to indicate the data block 12 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51157,7 +51176,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_11</name>
               <description>It is used to indicate the data block 11 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51177,7 +51196,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_10</name>
               <description>It is used to indicate the data block 10 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51197,7 +51216,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_9</name>
               <description>It is used to indicate the data block 9 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51217,7 +51236,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_8</name>
               <description>It is used to indicate the data block 8 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51237,7 +51256,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_7</name>
               <description>It is used to indicate the data block 7 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51257,7 +51276,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_6</name>
               <description>It is used to indicate the data block 6 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51277,7 +51296,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_5</name>
               <description>It is used to indicate the data block 5 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51297,7 +51316,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_4</name>
               <description>It is used to indicate the data block 4 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51317,7 +51336,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_3</name>
               <description>It is used to indicate the data block 3 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51337,7 +51356,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_2</name>
               <description>It is used to indicate the data block 2 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51357,7 +51376,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_1</name>
               <description>It is used to indicate the data block 1 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51377,7 +51396,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_DATA_BLOCK_MASK</name>
+              <name>NDFC_DATA_BLOCK_MASK_0</name>
               <description>It is used to indicate the data block 0 should be written or read during batch command procession(NDFC_CMD_TYPE=0x10 in ).  
 0: Disable 
 1: Enable  1 data block = 1024 bytes main field data. </description>
@@ -51406,7 +51425,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_31</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 31 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51426,7 +51445,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_30</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 30 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51446,7 +51465,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_29</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 29 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51466,7 +51485,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_28</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 28 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51486,7 +51505,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_27</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 27 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51506,7 +51525,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_26</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 26 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51526,7 +51545,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_25</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 25 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51546,7 +51565,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_24</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 24 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51566,7 +51585,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_23</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 23 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51586,7 +51605,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_22</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 22 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51606,7 +51625,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_21</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 21 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51626,7 +51645,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_20</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 20 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51646,7 +51665,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_19</name>
               <description>Special pattern (all 0x00 or all 0xff) found Flag for Data Block 19 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51666,7 +51685,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_18</name>
               <description>Special pattern (all 0x00 or all 0xff) Found flag for Data Block 18 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51686,7 +51705,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_17</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 17 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51706,7 +51725,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_16</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 16 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51726,7 +51745,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_15</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 15 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51746,7 +51765,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_14</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 14 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51766,7 +51785,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_13</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 13 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51786,7 +51805,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_12</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 12 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51806,7 +51825,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_11</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 11 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51826,7 +51845,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_10</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 10 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51846,7 +51865,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_9</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 9 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51866,7 +51885,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_8</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 8 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51886,7 +51905,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_7</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 7 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51906,7 +51925,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_6</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 6 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51926,7 +51945,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_5</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 5 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51946,7 +51965,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_4</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 4 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51966,7 +51985,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_3</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 3 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -51986,7 +52005,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_2</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 2 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -52006,7 +52025,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_1</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 1 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -52026,7 +52045,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPECIAL_PATTERN_OR_ALL</name>
+              <name>SPECIAL_0</name>
               <description>Special pattern (all 0x00 or all 0xff) found flag for Data Block 0 when read from external NAND flash. 
 0: No found 
 1: Special pattern is found The register of NDFC_PAT_ID would indicate which kind of pattern is found. </description>
@@ -52425,7 +52444,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_31</name>
               <description>Error information bit of Data Block 31 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[31] of this register is corresponding the 31th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52445,7 +52464,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_30</name>
               <description>Error information bit of Data Block 30 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[30] of this register is corresponding the 30th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52465,7 +52484,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_29</name>
               <description>Error information bit of Data Block 29 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[29] of this register is corresponding the 29th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52485,7 +52504,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_28</name>
               <description>Error information bit of Data Block 28 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[28] of this register is corresponding the 28th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52505,7 +52524,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_27</name>
               <description>Error information bit of Data Block 27 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[27] of this register is corresponding the 27th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52525,7 +52544,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_26</name>
               <description>Error information bit of Data Block 26 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[26] of this register is corresponding the 26th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52545,7 +52564,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_25</name>
               <description>Error information bit of Data Block 25 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[25] of this register is corresponding the 25th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52565,7 +52584,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_24</name>
               <description>Error information bit of Data Block 24 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[24] of this register is corresponding the 24th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52585,7 +52604,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_23</name>
               <description>Error information bit of Data Block 23 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[23] of this register is corresponding the 23th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52605,7 +52624,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_22</name>
               <description>Error information bit of Data Block 22 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[22] of this register is corresponding the 22th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52625,7 +52644,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_21</name>
               <description>Error information bit of Data Block 21 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[21] of this register is corresponding the 21th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52645,7 +52664,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_20</name>
               <description>Error information bit of Data Block 20 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[20] of this register is corresponding the 20th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52665,7 +52684,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_19</name>
               <description>Error information bit of Data Block 19 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[19] of this register is corresponding the 19th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52685,7 +52704,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_18</name>
               <description>Error information bit of Data Block 18 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[18] of this register is corresponding the 18th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52705,7 +52724,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_17</name>
               <description>Error information bit of Data Block 17 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[17] of this register is corresponding the 17th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52725,7 +52744,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_16</name>
               <description>Error information bit of Data Block 16 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[16] of this register is corresponding the 16th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52745,7 +52764,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_15</name>
               <description>Error information bit of Data Block 15 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[15] of this register is corresponding the 15th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52765,7 +52784,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_14</name>
               <description>Error information bit of Data Block 14 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[14] of this register is corresponding the 14th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52785,7 +52804,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_13</name>
               <description>Error information bit of Data Block 13 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[13] of this register is corresponding the 13th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52805,7 +52824,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_12</name>
               <description>Error information bit of Data Block 12 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[12] of this register is corresponding the 12th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52825,7 +52844,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_11</name>
               <description>Error information bit of Data Block 11 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[11] of this register is corresponding the 11th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52845,7 +52864,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_10</name>
               <description>Error information bit of Data Block 10 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[10] of this register is corresponding the 10th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52865,7 +52884,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_9</name>
               <description>Error information bit of Data Block 9 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[9] of this register is corresponding the 9th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52885,7 +52904,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_8</name>
               <description>Error information bit of Data Block 8 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[8] of this register is corresponding the 8th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52905,7 +52924,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_7</name>
               <description>Error information bit of Data Block 7 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[7] of this register is corresponding the 7th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52925,7 +52944,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_6</name>
               <description>Error information bit of Data Block 6 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[6] of this register is corresponding the 6th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52945,7 +52964,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_5</name>
               <description>Error information bit of Data Block 5 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[5] of this register is corresponding the 5th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52965,7 +52984,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_4</name>
               <description>Error information bit of Data Block 4 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[4] of this register is corresponding the 4th ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -52985,7 +53004,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_3</name>
               <description>Error information bit of Data Block 3 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[3] of this register is corresponding the 3rd ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -53005,7 +53024,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_2</name>
               <description>Error information bit of Data Block 2 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[2] of this register is corresponding the 2nd ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -53025,7 +53044,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_1</name>
               <description>Error information bit of Data Block 1 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[1] of this register is corresponding the 1st ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -53045,7 +53064,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>NDFC_ECC_ERR</name>
+              <name>NDFC_ECC_ERR_0</name>
               <description>Error information bit of Data Block 0 
 0: ECC can correct these error bits or there is no error bit 
 1: Error bits number beyond of ECC correction capability and cannot correct them The bit[0] of this register is corresponding the 0 ECC data block. 1 ECC Data Block = 1024 bytes. </description>
@@ -53136,8 +53155,33 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           <description>NDFC Error Counter Register(N from 0 to 7)</description>
           <addressOffset>0x50</addressOffset>
           <resetValue>0x0</resetValue>
-          <resetMask>0x0</resetMask>
-          <fields/>
+          <resetMask>0xFFFFFFFF</resetMask>
+          <fields>
+            <field>
+              <name>ECC_COR_NUM_3</name>
+              <description>ECC Corrected Bits Number for ECC Data Block[N*0x04+M] 00000000: No corrected bits 00000001: 1 corrected bit 00000010: 2 corrected bits ..... 01010000 : 80 corrected bits Others: Reserved</description>
+              <bitRange>[31:24]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>ECC_COR_NUM_2</name>
+              <description>ECC Corrected Bits Number for ECC Data Block[N*0x04+M] 00000000: No corrected bits 00000001: 1 corrected bit 00000010: 2 corrected bits ..... 01010000 : 80 corrected bits Others: Reserved</description>
+              <bitRange>[23:16]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>ECC_COR_NUM_1</name>
+              <description>ECC Corrected Bits Number for ECC Data Block[N*0x04+M] 00000000: No corrected bits 00000001: 1 corrected bit 00000010: 2 corrected bits ..... 01010000 : 80 corrected bits Others: Reserved</description>
+              <bitRange>[15:8]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>ECC_COR_NUM_0</name>
+              <description>ECC Corrected Bits Number for ECC Data Block[N*0x04+M] 00000000: No corrected bits 00000001: 1 corrected bit 00000010: 2 corrected bits ..... 01010000 : 80 corrected bits Others: Reserved</description>
+              <bitRange>[7:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
         </register>
         <register>
           <name>NDFC_INT</name>
@@ -53273,8 +53317,8 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           <name>NDFC_NDMA_MODE_CTL</name>
           <description>NDFC Normal DMA Mode Control Register</description>
           <addressOffset>0x120</addressOffset>
-          <resetValue>0x25</resetValue>
-          <resetMask>0x3F</resetMask>
+          <resetValue>0xE5</resetValue>
+          <resetMask>0xFF</resetMask>
           <fields>
             <field>
               <name>DMA_ACT_STA</name>
@@ -53314,8 +53358,201 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           <description>NDFC Pattern ID Register</description>
           <addressOffset>0x118</addressOffset>
           <resetValue>0x0</resetValue>
-          <resetMask>0x0</resetMask>
-          <fields/>
+          <resetMask>0xFFFFFFFF</resetMask>
+          <fields>
+            <field>
+              <name>PAT_ID_31</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[31:31]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_30</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[30:30]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_29</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[29:29]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_28</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[28:28]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_27</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[27:27]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_26</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[26:26]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_25</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[25:25]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_24</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[24:24]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_23</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[23:23]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_22</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[22:22]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_21</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[21:21]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_20</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[20:20]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_19</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[19:19]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_18</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[18:18]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_17</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[17:17]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_16</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[16:16]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_15</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[15:15]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_14</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[14:14]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_13</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[13:13]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_12</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[12:12]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_11</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[11:11]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_10</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[10:10]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_9</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[9:9]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_8</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[8:8]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_7</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[7:7]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_6</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[6:6]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_5</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[5:5]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_4</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[4:4]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_3</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_2</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[2:2]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_1</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PAT_ID_0</name>
+              <description>Special Pattern ID for ECC data block[n] 0: All 0x00 is found 1: All 0xFF is found</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
         </register>
         <register>
           <name>NDFC_RDATA_STA_0</name>
@@ -53936,8 +54173,57 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           <description>NDFC User Data Length Register(N from 0 to 3)</description>
           <addressOffset>0x70</addressOffset>
           <resetValue>0x0</resetValue>
-          <resetMask>0x0</resetMask>
-          <fields/>
+          <resetMask>0xFFFFFFFF</resetMask>
+          <fields>
+            <field>
+              <name>ECC_DATA_BLOCK_LEN_7</name>
+              <description>It's used to indicate user data's length of ECC DATA BLOCK[0x08*N+M]. 0000 : no user data 0001 : 4 bytes user data 0010 : 8 bytes user data 0011 : 12 bytes user data 0100 : 16 bytes user data 0101 : 20 bytes user data 0110 : 24 bytes user data 0111 : 28 bytes user data 1000 : 32 bytes user data Other : reserved</description>
+              <bitRange>[31:28]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ECC_DATA_BLOCK_LEN_6</name>
+              <description>It's used to indicate user data's length of ECC DATA BLOCK[0x08*N+M]. 0000 : no user data 0001 : 4 bytes user data 0010 : 8 bytes user data 0011 : 12 bytes user data 0100 : 16 bytes user data 0101 : 20 bytes user data 0110 : 24 bytes user data 0111 : 28 bytes user data 1000 : 32 bytes user data Other : reserved</description>
+              <bitRange>[27:24]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ECC_DATA_BLOCK_LEN_5</name>
+              <description>It's used to indicate user data's length of ECC DATA BLOCK[0x08*N+M]. 0000 : no user data 0001 : 4 bytes user data 0010 : 8 bytes user data 0011 : 12 bytes user data 0100 : 16 bytes user data 0101 : 20 bytes user data 0110 : 24 bytes user data 0111 : 28 bytes user data 1000 : 32 bytes user data Other : reserved</description>
+              <bitRange>[23:20]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ECC_DATA_BLOCK_LEN_4</name>
+              <description>It's used to indicate user data's length of ECC DATA BLOCK[0x08*N+M]. 0000 : no user data 0001 : 4 bytes user data 0010 : 8 bytes user data 0011 : 12 bytes user data 0100 : 16 bytes user data 0101 : 20 bytes user data 0110 : 24 bytes user data 0111 : 28 bytes user data 1000 : 32 bytes user data Other : reserved</description>
+              <bitRange>[19:16]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ECC_DATA_BLOCK_LEN_3</name>
+              <description>It's used to indicate user data's length of ECC DATA BLOCK[0x08*N+M]. 0000 : no user data 0001 : 4 bytes user data 0010 : 8 bytes user data 0011 : 12 bytes user data 0100 : 16 bytes user data 0101 : 20 bytes user data 0110 : 24 bytes user data 0111 : 28 bytes user data 1000 : 32 bytes user data Other : reserved</description>
+              <bitRange>[15:12]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ECC_DATA_BLOCK_LEN_2</name>
+              <description>It's used to indicate user data's length of ECC DATA BLOCK[0x08*N+M]. 0000 : no user data 0001 : 4 bytes user data 0010 : 8 bytes user data 0011 : 12 bytes user data 0100 : 16 bytes user data 0101 : 20 bytes user data 0110 : 24 bytes user data 0111 : 28 bytes user data 1000 : 32 bytes user data Other : reserved</description>
+              <bitRange>[11:8]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ECC_DATA_BLOCK_LEN_1</name>
+              <description>It's used to indicate user data's length of ECC DATA BLOCK[0x08*N+M]. 0000 : no user data 0001 : 4 bytes user data 0010 : 8 bytes user data 0011 : 12 bytes user data 0100 : 16 bytes user data 0101 : 20 bytes user data 0110 : 24 bytes user data 0111 : 28 bytes user data 1000 : 32 bytes user data Other : reserved</description>
+              <bitRange>[7:4]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ECC_DATA_BLOCK_LEN_0</name>
+              <description>It's used to indicate user data's length of ECC DATA BLOCK[0x08*N+M]. 0000 : no user data 0001 : 4 bytes user data 0010 : 8 bytes user data 0011 : 12 bytes user data 0100 : 16 bytes user data 0101 : 20 bytes user data 0110 : 24 bytes user data 0111 : 28 bytes user data 1000 : 32 bytes user data Other : reserved</description>
+              <bitRange>[3:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
         </register>
         <register>
           <dim>32</dim>
@@ -66353,8 +66639,8 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           <resetMask>0xC33F3FEF</resetMask>
           <fields>
             <field>
-              <name>TCE</name>
-              <description>Transfer Control Enable In master mode, it is used to start to transfer the serial bits frame, it is only valid when Work Mode Select==0x10/0x11.  
+              <name>TCE_TRANSFER</name>
+              <description>TCE Transfer Control Enable In master mode, it is used to start to transfer the serial bits frame, it is only valid when Work Mode Select==0x10/0x11.  
 0: Idle 
 1: Initiates transfer  Writing `1` to this bit will start to transfer serial bits frame(the value comes from the SPI TX Bit Register or SPI RX Bit Register ), and will auto clear after the bursts transfer completely. Writing `0` to this bit has no effect. </description>
               <bitRange>[31:31]</bitRange>
@@ -66373,8 +66659,8 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>MSMS</name>
-              <description>Master Sample Standard 
+              <name>MSMS_MASTER</name>
+              <description>MSMS Master Sample Standard 
 0: Delay Sample Mode 
 1: Standard Sample Mode In Standard Sample Mode, SPI master samples the data at the standard   rising edge of SCLK for each SPI mode; In Delay Sample Mode, SPI master samples data at the edge that is half cycle delayed by the standard rising edge of SCLK defined in respective SPI mode. </description>
               <bitRange>[30:30]</bitRange>
@@ -66393,8 +66679,8 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>TBC</name>
-              <description>Transfer Bits Completed When set, this bit indicates that the last bit of the serial data frame in SPI TX Bit Register SPI RX Bit Register has been transferred completely. Writing 1 to this bit clears it. 
+              <name>TBC_TRANSFER</name>
+              <description>TBC Transfer Bits Completed When set, this bit indicates that the last bit of the serial data frame in SPI TX Bit Register SPI RX Bit Register has been transferred completely. Writing 1 to this bit clears it. 
 0: Busy 
 1: Transfer Completed It is only valid when Work Mode Select==0x10/0x11. </description>
               <bitRange>[25:25]</bitRange>
@@ -66414,8 +66700,8 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>TBC_INT_EN</name>
-              <description>Transfer Bits Completed Interrupt Enable 
+              <name>TBC_INT_EN_TRANSFER</name>
+              <description>TBC_INT_EN Transfer Bits Completed Interrupt Enable 
 0: Disable 
 1: Enable It is only valid when Work Mode Select==0x10/0x11.  </description>
               <bitRange>[24:24]</bitRange>
@@ -66434,7 +66720,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>CONFIGURE</name>
+              <name>RX_BURST_LEN</name>
               <description>Configure the length of serial data frame(burst) of RX  
 000000: 0bit 
 000001: 1bit ... 
@@ -66460,7 +66746,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>CONFIGURE</name>
+              <name>TX_BURST_LEN</name>
               <description>Configure the length of serial data frame(burst) of TX  
 000000: 0bit 
 000001: 1bit ... 
@@ -66487,7 +66773,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
             </field>
             <field>
               <name>SS_LEVEL</name>
-              <description>When control SS signal manually , set this bit to `1` or `0` to control the level of SS signal. 
+              <description>SS_LEVEL When control SS signal manually , set this bit to `1` or `0` to control the level of SS signal. 
 0: Set SS to low 
 1: Set SS to high It is only valid when Work Mode Select==0x10/0x11, and only work in Mode0 , cannot be written when TCE=1. </description>
               <bitRange>[7:7]</bitRange>
@@ -66506,8 +66792,8 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SS_OWNER</name>
-              <description>SS Output Owner Select Usually, controller sends SS signal automatically with data together. When this bit is set to 1, software must manually write SPI_CTL_REG.SS_LEVEL to 1 or 0 to control the level of SS signal. 
+              <name>SS_OWNER_SS</name>
+              <description>SS_OWNER SS Output Owner Select Usually, controller sends SS signal automatically with data together. When this bit is set to 1, software must manually write SPI_CTL_REG.SS_LEVEL to 1 or 0 to control the level of SS signal. 
 0: SPI controller 
 1: Software It is only valid when Work Mode Select==0x10/0x11, and only work in Mode0 , cannot be written when TCE=1. </description>
               <bitRange>[6:6]</bitRange>
@@ -66526,8 +66812,8 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SPOL</name>
-              <description>SPI Chip Select Signal Polarity Control 
+              <name>SPOL_SPI</name>
+              <description>SPOL SPI Chip Select Signal Polarity Control 
 0: Active high polarity (0 = Idle) 
 1: Active low polarity (1 = Idle) It is only valid when Work Mode Select==0x10/0x11, and only work in Mode0 , cannot be written when TCE=1. </description>
               <bitRange>[5:5]</bitRange>
@@ -66546,8 +66832,8 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>SS_SEL</name>
-              <description>SPI Chip Select Select one of four external SPI Master/Slave Devices 
+              <name>SS_SEL_SPI</name>
+              <description>SS_SEL SPI Chip Select Select one of four external SPI Master/Slave Devices 
 00: SPI_SS0 will be asserted 
 01: SPI_SS1 will be asserted 
 10: SPI_SS2 will be asserted 
@@ -66578,7 +66864,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
               </enumeratedValues>
             </field>
             <field>
-              <name>WORK_MODE_SELECT</name>
+              <name>WORK_MODE</name>
               <description>Work Mode Select 
 00: Data frame is byte aligned in standard SPI, dual-output/dual input SPI, dual IO SPI and quad-output/quad-input SPI.  
 01: Reserved 
@@ -67500,8 +67786,8 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           <name>SPI_NDMA_MODE_CTL</name>
           <description>SPI Normal DMA Mode Control Register</description>
           <addressOffset>0x88</addressOffset>
-          <resetValue>0x25</resetValue>
-          <resetMask>0x3F</resetMask>
+          <resetValue>0xE5</resetValue>
+          <resetMask>0xFF</resetMask>
           <fields>
             <field>
               <name>DELAY_CYCLES_THE_COUNTS_OF_HOLD</name>
@@ -71917,7 +72203,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           </register>
           <register>
             <name>TV_FILL_BEGIN_REG</name>
-            <description>TV_FILL_BEGIN_REG</description>
+            <description>TV Fill Data Begin Register</description>
             <addressOffset>0x1C4</addressOffset>
             <resetValue>0x0</resetValue>
             <resetMask>0xFFFFFF</resetMask>
@@ -71932,7 +72218,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           </register>
           <register>
             <name>TV_FILL_DATA_REG</name>
-            <description>TV_FILL_DATA_REG</description>
+            <description>TV Fill Data Value Register</description>
             <addressOffset>0x1CC</addressOffset>
             <resetValue>0x0</resetValue>
             <resetMask>0x3FFFFFFF</resetMask>
@@ -71947,7 +72233,7 @@ EBE: End Bit Error  RTO: Response Timeout/Boot ACK Timeout  RCRC: Response CRC  
           </register>
           <register>
             <name>TV_FILL_END_REG</name>
-            <description>TV_FILL_END_REG</description>
+            <description>TV Fill Data End Register</description>
             <addressOffset>0x1C8</addressOffset>
             <resetValue>0x0</resetValue>
             <resetMask>0xFFFFFF</resetMask>
